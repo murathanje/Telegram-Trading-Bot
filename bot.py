@@ -16,7 +16,7 @@ islem = 0
 def calistir():
 
     mesaj = "Kontrol"
-    requests.post(url="########################", data={"chat_id":"########################", "text": mesaj}).json()
+    requests.post(url="https://api.telegram.org/bot5430197913:AAGAuZLGp0_iJIvbC3z4qZQ_i6Up4s1wtp4/sendMessage", data={"chat_id":"615278769", "text": mesaj}).json()
 
 
     client = Client(None, None)
@@ -35,7 +35,7 @@ def calistir():
     def veriCekmeveOlustuma():
         # coinler = ['BTCUSDT', 'FTMUSDT', 'MINAUSDT']                    #18 February 2022 FOR 1 HOUR OR 11 JULY 2021 //MA-100 23 AGUST 2021 1HOUR------ 1 JULY 2021 4 HOUR MA100
         # for coin in coinler:
-        csvOlustur('FTMUSDT', verileriGetir('FTMUSDT', Client.KLINE_INTERVAL_15MINUTE, '17 July 2022', '24 July 2029'))
+        csvOlustur('FTMUSDT', verileriGetir('FTMUSDT', Client.KLINE_INTERVAL_15MINUTE, '17 September 2022', '24 July 2029'))
         print('FTMUSDT' + ' verileri getirildi')
 
     def zamanHesabi(timestamp):
@@ -44,7 +44,7 @@ def calistir():
     veriCekmeveOlustuma()
 
     def yaz(zama,cuz,co,t_islem):
-        f = open("data.txt","w")
+        f = open("ac.txt","w")
         f.write(zama+"\n")
         f.write(cuz+"\n")
         f.write(co+"\n")
@@ -56,7 +56,7 @@ def calistir():
         global cuzdan
         global toplamCoin
         global islem
-        dosya = open("data.txt","r")
+        dosya = open("ac.txt","r")
         d = dosya.readlines()
         metin = int(d[0])
         cuzdan = float(d[1])
@@ -94,7 +94,7 @@ def calistir():
                         islem+=1
                         toplamCoin +=  cuzdan/close[i]
                         mesaj = "----ALIŞ----\n\nTarih: {0}\n\nAlış Fiyatı fiyatı: {4}\n\nCuzdan: {1}\n\nToplam adet: {2}\n\nİslem: {3}".format(zamanHesabi(acilisZamani[i]),cuzdan,toplamCoin,islem,close[i])
-                        requests.post(url="########################", data={"chat_id":"########################", "text": mesaj}).json()
+                        requests.post(url="https://api.telegram.org/bot5430197913:AAGAuZLGp0_iJIvbC3z4qZQ_i6Up4s1wtp4/sendMessage", data={"chat_id":"615278769", "text": mesaj}).json()
                         cuzdan = 0
                         yaz(str(acilisZamani[i]),str(cuzdan),str(toplamCoin),str(islem))
 
@@ -110,7 +110,7 @@ def calistir():
                         fiyat = close[i]*toplamCoin
                         cuzdan = fiyat
                         mesaj = "----SATIŞ----\n\nTarih: {0}\n\nSatış fiyatı: {4}\n\nAdet: {1}\n\nCuzdan: {2}\n\nİşlem: {3}".format(zamanHesabi(acilisZamani[i]),toplamCoin,cuzdan,islem,close[i])
-                        requests.post(url="########################", data={"chat_id":"########################", "text": mesaj}).json()
+                        requests.post(url="https://api.telegram.org/bot5430197913:AAGAuZLGp0_iJIvbC3z4qZQ_i6Up4s1wtp4/sendMessage", data={"chat_id":"615278769", "text": mesaj}).json()
                         toplamCoin = 0
                         yaz(str(acilisZamani[i]),str(cuzdan),str(toplamCoin),str(islem))
 
@@ -122,4 +122,4 @@ def calistir():
 
 while True:
     calistir()
-    time.sleep(900)
+    time.sleep(2)
